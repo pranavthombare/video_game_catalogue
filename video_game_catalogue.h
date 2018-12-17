@@ -1,35 +1,48 @@
 #define _video_game_catalogue_
 #include<string>
+#include<iostream>
+using namespace std;
 
-class games{
+class games
+{
+  char* title;
   int rel_year;
   std::string manufacturer;
-  char* genre;
   char rating;            //Used for ESRB Ratings
 public:
 
+  char getTitle()
+  {
+    return *title;
+  }
   //Getter Methods
-  void getReleaseYear()
+  int getReleaseYear()
   {
-    cout<<"The game was released in the year: "<<rel_year<<endl;
+    return rel_year;
   }
-  void getManufacturer()
+  string getManufacturer()
   {
-    cout<<"The game was was produced by:  "<<manufacturer<<endl;
-  }
-  void getGenre()
-  {
-    cout<<"The game belongs to genre: "<<genre<<endl;
+    return manufacturer;
   }
 
   //Setter Methods
-  virtual void setReleaseYear(int)=0;
-  virtual void setManufacturer(string)=0;
-  virtual void setGenre(char*)=0;
+  void setTitle(char* title)
+  {
+    this->title= title;
+  }
+  void setReleaseYear(int year)
+  {
+    rel_year = year;
+  }
+  void setManufacturer(string manufc)
+  {
+    manufacturer = manufc;
+  }
 
 };
 
-class console:public games{
+class console:public games
+{
   char version;
   char console_name;
 public:
@@ -37,13 +50,13 @@ public:
   {
     cout<<console_name;
   }
-  void version()
+  void getVersion()
   {
     cout<<version;
   }
 
   //setter methods
-  
+
 };
 
 class pc:public games

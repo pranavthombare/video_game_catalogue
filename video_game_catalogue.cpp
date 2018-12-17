@@ -18,10 +18,14 @@ int main()
 {
 
   int choice;
-  char* game_title;
+  string device;
   char* production_house;
   string insert_data;
   unsigned int curLine = 0;
+
+  console c1;
+  pc p1;
+  mobile m1;
 
   ifstream inFile;
   ofstream outFile;
@@ -39,13 +43,27 @@ int main()
     case 1: system("clear");            //Used to clear the terminal window
             int search_choice;
 
-            cout<<"Search by : \n1. Game Title \n2. Production house(EA, Ubisoft, Activision etc) \n3. All \n4. Go to previous menu";
+            cout<<"Search by : \n1. Device played on (PC, Console, Mobile) \n2. Production house(EA, Ubisoft, Activision etc) \n3. All \n4. Go to previous menu";
             cin>>search_choice;
             switch(search_choice)
             {
               case 1: system("clear");
-                      cout<<"\n Enter the game title you want to search: ";
-                      cin>>game_title;
+                      cout<<"\n Enter the game Device you want to search by: ";
+                      cin>>device;
+                      if(device=="PC" || device=="pc" || device=="Pc")
+                      {
+                        inFile.open("pc.txt");
+                      }
+                      else if(device=="console" || device=="Console")
+                      {
+                        inFile.open("console.txt");
+
+                      }
+                      else if(device=="mobile" || device=="Mobile")
+                      {
+                        inFile.open("mobile.txt");
+
+                      }
 
               break;
 
@@ -74,10 +92,13 @@ int main()
             outFile.open("video_game_catalogue.dat",ios::app);
             writeAgain:
             insert_data = new char[LINE_LENGTH];
-            cout << "Enter the data of the format ''game name - Publishing house -'' : \n" ;
-            cin>>insert_data;
+            cout << "Enter the data of the format ''game title - Publishing house - year released - price(GBP)'' : \n" ;
+            cout<<"Game Title: ";
+            char gttle[20];
+            getline(cin,gttle);
+            c1.setTitle(gttle);
             // write inputted data into the file.
-            outFile << insert_data <<endl;
+            outFile << c1.getTitle() <<endl;
             char write_again;
             cout<<"\n Do you want to enter new data(Y/n)?";
             cin>>write_again;
